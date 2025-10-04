@@ -1,0 +1,24 @@
+button {
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  border: 3px solid black;
+}
+
+.Box {
+  height: 200px;
+  width: auto;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.RandomBtn {
+  height: 100px;
+  width: auto;
+  border: 20px;
+  margin: 20px;
+  padding: 20px;
+}
