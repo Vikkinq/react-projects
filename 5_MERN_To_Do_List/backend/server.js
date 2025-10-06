@@ -6,8 +6,18 @@ const { v4: uuid } = require("uuid");
 
 const app = express();
 const LOCAL_PORT = 5000;
+const mongo_env = process.env.MONGO_ATLAS;
+const mongo_url = "mongodb://127.0.0.1:27017/1_MERN_TODO";
+
+const Task = require("./models/Tasks");
 
 app.set("views", path.join(__dirname, "views"));
+
+main().catch((err) => console.log("Error Connection", err));
+async function main() {
+  await mongoose.connect(mongo_url);
+  console.log("DB CONNECTED!");
+}
 
 // HTTP FORMATS
 app.use(express.json());
