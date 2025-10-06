@@ -20,7 +20,7 @@ function App() {
         <h1>To Do List</h1>
         <hr />
         {task.map((t) => (
-          <Task key={t.id} {...t} />
+          <Task key={t._id} {...t} />
         ))}
       </div>
     </>

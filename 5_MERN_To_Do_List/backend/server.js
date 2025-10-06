@@ -23,28 +23,23 @@ async function main() {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const data = [
-  {
-    id: uuid(),
-    task: "Watch Football",
-    description: "To have fun with Bros and also Watch the Greatest of All Time Play",
-    deadline: "October 10, 2025",
-    completed: false,
-  },
-  {
-    id: uuid(),
-    task: "Master MERN",
-    description: "To Learn the Basics and Foundations of MERN and become a Full Stack Developer in the Future",
-    deadline: "October 15, 2025",
-    completed: false,
-  },
-];
-
-app.get("/api/tasks", (req, res) => {
-  res.json(data);
+app.get("/api/tasks", async (req, res) => {
+  try {
+    const taskData = await Task.find();
+    res.json(taskData);
+  } catch (err) {
+    res.json({ message: err.message });
+  }
 });
 
-app.post("/api/tasks", (req, res) => {});
+app.post("/api/tasks", async (req, res) => {
+  try {
+    const newData = new Task(req.body);
+    await newData.save();
+  } catch (err) {
+    res.json({ message: err.message });
+  }
+});
 
 app.listen(LOCAL_PORT, () => {
   console.log(`Server Started: http://localhost:${LOCAL_PORT}`);
