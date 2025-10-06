@@ -1,27 +1,17 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-import Task from "./components/Task";
+import Task from "./pages/Task";
+import Router from "./routes/Router";
+import AddButton from "./components/AddButton";
 
 function App() {
-  const [task, setTask] = useState([]);
-
-  useEffect(() => {
-    fetch("/api/tasks")
-      .then((res) => res.json())
-      .then((taskData) => {
-        setTask(taskData);
-      });
-  }, []);
-
   return (
     <>
       <div>
         <h1>To Do List</h1>
         <hr />
-        {task.map((t) => (
-          <Task key={t._id} {...t} />
-        ))}
+        <Router />
       </div>
     </>
   );

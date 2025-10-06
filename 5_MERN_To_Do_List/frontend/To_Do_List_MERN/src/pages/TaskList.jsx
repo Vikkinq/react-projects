@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function Task({ id, task, description, deadline, completed }) {
+export default function TaskList({ id, task, description, deadline, completed }) {
   return (
     <Card sx={{ maxWidth: 345, m: 2 }}>
       <CardContent>

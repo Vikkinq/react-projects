@@ -36,6 +36,7 @@ app.post("/api/tasks", async (req, res) => {
   try {
     const newData = new Task(req.body);
     await newData.save();
+    console.log(`Successfully Created Data: `, req.body);
   } catch (err) {
     res.json({ message: err.message });
   }
