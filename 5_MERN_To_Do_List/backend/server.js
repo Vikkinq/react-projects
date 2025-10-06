@@ -34,11 +34,13 @@ app.get("/api/tasks", async (req, res) => {
 
 app.post("/api/tasks", async (req, res) => {
   try {
-    const newData = new Task(req.body);
-    await newData.save();
-    console.log(`Successfully Created Data: `, req.body);
+    const newData = await Task.create(req.body);
+
+    console.log("✅ Successfully Created Data:", req.body);
+    res.status(201).json({ success: true, task: newData });
   } catch (err) {
-    res.json({ message: err.message });
+    console.error("Server Error:", err.message);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 });
 

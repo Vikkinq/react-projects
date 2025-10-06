@@ -20,7 +20,6 @@ export default function AddTask() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Submitting Form: ${formData}`);
     try {
       const res = await fetch("/api/tasks", {
         method: "POST",
@@ -28,10 +27,9 @@ export default function AddTask() {
         body: JSON.stringify(formData),
       });
 
+      navigate("/");
       const data = await res.json(); // parse response
       console.log("✅ Success:", data);
-
-      navigate("/"); // redirect after success
     } catch (err) {
       console.error("Error:", err);
     }
