@@ -14,12 +14,17 @@ export default function Task() {
       });
   }, []);
 
+  const handleDelete = async (id) => {
+    await fetch(`/api/task/${id}`, { method: "DELETE" });
+    setTask((prev) => prev.filter((t) => t._id !== id)); // update UI
+  };
+
   return (
     <>
       <div>
         <AddButton />
         {task.map((t) => (
-          <TaskList key={t._id} {...t} />
+          <TaskList key={t._id} {...t} id={t._id} taskDelete={handleDelete} />
         ))}
       </div>
     </>

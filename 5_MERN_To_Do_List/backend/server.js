@@ -44,6 +44,44 @@ app.post("/api/tasks", async (req, res) => {
   }
 });
 
+app.get("/api/task/:id/update", async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    if (!task) return res.status(404).json({ message: "Task not found" });
+    res.json(task);
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.put("/api/task/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const taskData = await Task.findByIdAndUpdate(id, req.body, {
+      runValidators: true,
+      new: true,
+    });
+    console.log("Successfully Updated: ", id);
+    res.json(taskData); // Must send a response!
+  } catch (err) {
+    console.error("Server Error:", err.message);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.delete("/api/task/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const taskData = await Task.findByIdAndDelete(id);
+
+    console.log("Successfully Deleted: ", id);
+    res.json(taskData);
+  } catch (err) {
+    console.error("Server Error:", err.message);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
 app.listen(LOCAL_PORT, () => {
   console.log(`Server Started: http://localhost:${LOCAL_PORT}`);
 });

@@ -5,7 +5,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-export default function TaskList({ id, task, description, deadline, completed }) {
+import { useNavigate } from "react-router-dom";
+import UpdateButton from "../components/UpdateButton";
+
+export default function TaskList({ id, task, description, deadline, completed, taskDelete }) {
+  const navigate = useNavigate();
   return (
     <Card sx={{ maxWidth: 345, m: 2 }}>
       <CardContent>
@@ -19,8 +23,10 @@ export default function TaskList({ id, task, description, deadline, completed })
         <h6>{deadline}</h6>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <UpdateButton taskId={id} />
+        <Button size="small" onClick={() => taskDelete(id)}>
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );
